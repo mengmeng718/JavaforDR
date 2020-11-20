@@ -20,13 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="293f0753-940f-44cb-bf87-4986970168b3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/neusoft/JDBCDemo4.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/neusoft/JDBCDemo5.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/neusoft/JDBCDemo6.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/neusoft/JDBCDemo7.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/neusoft/domain/Emp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/neusoft/utils/JDBCUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/druid.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sell_admin/src/com/neusoft/utils/JDBCUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sell_admin/src/druid.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -171,6 +166,8 @@
       <workItem from="1605746510474" duration="8967000" />
       <workItem from="1605764841235" duration="12198000" />
       <workItem from="1605789729412" duration="379000" />
+      <workItem from="1605837372839" duration="291000" />
+      <workItem from="1605838090273" duration="426000" />
     </task>
     <servers />
   </component>
@@ -194,6 +191,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="446" y="46" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1605754311634" />
+    <state x="421" y="81" key="FileChooserDialogImpl" timestamp="1605838123963">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="81" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1605838123963" />
     <state width="1237" height="138" key="GridCell.Tab.0.bottom" timestamp="1605778237152">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -214,5 +215,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="307" y="42" key="RollbackChangesDialog/0.0.1280.680@0.0.1280.680" timestamp="1605686380125" />
+    <state x="28" y="0" key="new project wizard" timestamp="1605838126013">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="28" y="0" key="new project wizard/0.0.1280.680@0.0.1280.680" timestamp="1605838126013" />
   </component>
 </project>
