@@ -16,9 +16,9 @@ public class BusinessViewImpl implements BusinessView {
     public void listAllBusinesses() {
         BusinessDao dao = new BusinessDaoImpl();
         List<Business> list = dao.listBusiness(null, null);
-        System.out.println("商家编号" + "\t" + "商家名称" + "\t" + "商家地址" + "\t" + "商家备注" + "\t" + "商家配送费" + "\t" + "商家起送费");
+        System.out.println("商家编号" + "\t" + "商家名称" + "\t" + "商家地址" + "\t" + "商家备注" + "\t" + "商家起送费" + "\t" + "商家配送费");
         for (Business b : list) {
-            System.out.println(b.getBusinessId() + "\t" + b.getBusinessName() + "\t" + b.getBusinessAddress() + "\t" + b.getBusinessExplain() + "\t" + b.getDeliveryPrice() + "\t" + b.getStartPrice());
+            System.out.println(b.getBusinessId() + "\t" + b.getBusinessName() + "\t" + b.getBusinessAddress() + "\t" + b.getBusinessExplain() + "\t" +  b.getStartPrice()+ "\t" + b.getDeliveryPrice());
         }
 
     }
@@ -37,17 +37,16 @@ public class BusinessViewImpl implements BusinessView {
 
         System.out.println("请输入是否输入商家地址关键词(y/n):");
         inputStr = input.next();
-        if (inputStr.equals("y")) {
+        if (inputStr.equals("y")){
             System.out.println("请输入商家地址关键词");
             businessAddress = input.next();
         }
         BusinessDaoImpl dao = new BusinessDaoImpl();
         List<Business> list = dao.listBusiness(businessName, businessAddress);
-        System.out.println("商家编号" + "\t" + "商家名称" + "\t" + "商家地址" + "\t" + "商家备注" + "\t" + "商家配送费" + "\t" + "商家起送费");
-        for (Business b : list) {
-            System.out.println(b.getBusinessId() + "\t" + b.getBusinessName() + "\t" + b.getBusinessAddress() + "\t" + b.getBusinessExplain() + "\t" + b.getDeliveryPrice() + "\t" + b.getStartPrice());
+        System.out.println("商家编号"+"\t"+"商家名称"+"\t"+"商家地址"+"\t"+"商家备注"+"\t"+"商家起送费"+"\t"+"商家配送费");
+        for (Business b :list){
+            System.out.println(b.getBusinessId() +"\t"+b.getBusinessName()+"\t"+b.getBusinessAddress()+"\t"+b.getBusinessExplain()+"\t"+b.getStartPrice()+"\t"+b.getDeliveryPrice());
         }
-
     }
 
     @Override
@@ -95,4 +94,93 @@ public class BusinessViewImpl implements BusinessView {
 
         return dao.getBusinessByIdAndPassword(businessId, password);
     }
+
+    @Override
+    public void updatePassword(Integer businessId) {
+        BusinessDao dao = new BusinessDaoImpl();
+        Business business = dao.getBusinessById(businessId);
+        new BusinessDaoImpl();
+        System.out.println("请输入旧密码");
+        String oldPass = input.next();
+        // 进行密码校验
+        if (!business.getPassword().equals(oldPass)){
+            System.out.println("你的密码蒙错了，请返回再试");
+        }else {
+            System.out.println("请输入新密码");
+            String newPass = input.next();
+            System.out.println("请再次输入新密码");
+            String beginNewPass = input.next();
+            if(!newPass.equals(beginNewPass)){
+                System.out.println("两次密码不一致请返回再试");
+            }else {
+                int res = dao.updateBusinessPassword(businessId, newPass);
+                if (res>0){
+                    System.out.println("修改密码成功！");
+                }else {
+                    System.out.println("修改密码失败！");
+                }
+            }
+        }
+    }
+
+    @Override
+    public void listBusinesses(Integer businessId) {
+        BusinessDao dao = new BusinessDaoImpl();
+        Business business = dao.getBusinessById(businessId);
+        System.out.println("商家编号" + "\t" + "商家名称" + "\t" + "商家地址" + "\t" + "商家备注" + "\t" + "商家起送费" + "\t" + "商家配送费");
+        System.out.println(business.getBusinessId() + "\t" + business.getBusinessName() + "\t" + business.getBusinessExplain()  + "\t" + business.getBusinessAddress()+ "\t" + business.getDeliveryPrice() + "\t" + business.getStartPrice());
+    }
+
+    @Override
+    public void updateBusiness(Integer businessId) {
+        BusinessDao dao = new BusinessDaoImpl();
+        Business business = dao.getBusinessById(businessId);
+        int menu = 0;
+        int res = 0;
+        while (menu != 6) {
+            System.out.println(">>>二级菜单  1. 修改商家名称   2. 修改商家地址    3. 修改商家备注    4. 修改起送费   5. 修改配送费   6. 返回上一级菜单");
+            System.out.println("请输入你要选择的序号：");
+            menu = input.nextInt();
+            System.out.println("请输入修改后的内容：");
+            switch (menu) {
+                case 1:
+                    String businessName = input.next();
+                    business.setBusinessName(businessName);
+                    res = dao.updateBusiness(business);
+                    break;
+                case 2:
+                    String businessAddress = input.next();
+                    business.setBusinessAddress(businessAddress);
+                    res = dao.updateBusiness(business);
+                    break;
+                case 3:
+                    String businessExplain = input.next();
+                    business.setBusinessExplain(businessExplain);
+                    res = dao.updateBusiness(business);
+                    break;
+                case 4:
+                    double starPrice = input.nextDouble();
+                    business.setStartPrice(starPrice);
+                    res = dao.updateBusiness(business);
+                    break;
+                case 5:
+                    double deliveryPrice = input.nextDouble();
+                    business.setDeliveryPrice(deliveryPrice);
+                    res = dao.updateBusiness(business);
+                    break;
+                case 6:
+                    break;
+                default:
+                    System.out.println("没有这个选项");
+                    break;
+
+            }
+            if (res>0){
+                System.out.println("修改成功！");
+            }else {
+                System.out.println("修改失败！");
+            }
+        }
+    }
+
 }
