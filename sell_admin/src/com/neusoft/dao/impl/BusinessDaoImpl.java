@@ -1,4 +1,3 @@
-
 package com.neusoft.dao.impl;
 
 import com.neusoft.dao.BusinessDao;
@@ -17,17 +16,29 @@ public class BusinessDaoImpl  implements BusinessDao {
     PreparedStatement pst = null;
     ResultSet rs = null;
     @Override
-    public List<Business> listBusiness() {
+    public List<Business> listBusiness(String businessName,  String businessAddress) {
         ArrayList<Business> list = new ArrayList<>();
-        String sql = "select * from business";
+        StringBuffer sql = new StringBuffer("select * from business WHERE 1=1");
+        if (businessName !=null && !businessName.equals("")){
+            sql.append(" and  businessName LIKE '%"+businessName+"%'");
+        }
+        if (businessAddress !=null && !businessAddress.equals("") ){
+            sql.append(" and businessAddress like '%"+businessAddress+"%'");
+        }
+//        System.out.println("sql ="+sql.toString());
         try {
             conn = JDBCUtils.getConnection();
-            pst = conn.prepareStatement(sql);
+            pst = conn.prepareStatement(sql.toString());
             rs = pst.executeQuery();
             while (rs.next()){
                 Business business = new Business();
-                String businessName = rs.getString(3);
-                business.setBusinessName(businessName);
+                business.setBusinessId(rs.getInt("businessId"));
+                business.setPassword(rs.getString("password"));
+                business.setBusinessName(rs.getString("businessName"));
+                business.setBusinessAddress(rs.getString("businessAddress"));
+                business.setBusinessExplain(rs.getString("businessExplain"));
+                business.setStartPrice(rs.getDouble("starPrice"));
+                business.setDeliveryPrice(rs.getDouble("deliveryPrice"));
                 list.add(business);
             }
 
@@ -37,7 +48,26 @@ public class BusinessDaoImpl  implements BusinessDao {
 
         return list;
     }
-
+//    public List<Business> listBusiness() {
+//        ArrayList<Business> list = new ArrayList<>();
+//        String sql = "select * from business";
+//        try {
+//            conn = JDBCUtils.getConnection();
+//            pst = conn.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//            while (rs.next()){
+//                Business business = new Business();
+//                String businessName = rs.getString(3);
+//                business.setBusinessName(businessName);
+//                list.add(business);
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return list;
+//    }
     @Override
     public int saveBusiness(String businessName) {
         int businessId = 0;
@@ -128,12 +158,8 @@ public class BusinessDaoImpl  implements BusinessDao {
             rs = pst.executeQuery();
             while (rs.next()){
                 business = new Business();
-                business.setBusinessId(rs.getInt("businessId"));
                 business.setBusinessName(rs.getString("businessName"));
-                business.setBusinessAddress(rs.getString("businessAddress"));
-                business.setBusinessExplain(rs.getString("businessExplain"));
-                business.setStartPrice(rs.getDouble("starPrice"));
-                business.setDeliveryPrice(rs.getDouble("deliveryPrice"));
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,4 +168,28 @@ public class BusinessDaoImpl  implements BusinessDao {
         }
         return business;
     }
+//    public Business getBusinessById(Integer businessId) {
+//        Business business = null;
+//        String sql = "select * from business where businessId = ?";
+//        try {
+//            conn = JDBCUtils.getConnection();
+//            pst = conn.prepareStatement(sql);
+//            pst.setInt(1, businessId);
+//            rs = pst.executeQuery();
+//            while (rs.next()){
+//                business = new Business();
+//                business.setBusinessId(rs.getInt("businessId"));
+//                business.setBusinessName(rs.getString("businessName"));
+//                business.setBusinessAddress(rs.getString("businessAddress"));
+//                business.setBusinessExplain(rs.getString("businessExplain"));
+//                business.setStartPrice(rs.getDouble("starPrice"));
+//                business.setDeliveryPrice(rs.getDouble("deliveryPrice"));
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }finally {
+//            JDBCUtils.close(rs, pst, conn);
+//        }
+//        return business;
+//    }
 }
