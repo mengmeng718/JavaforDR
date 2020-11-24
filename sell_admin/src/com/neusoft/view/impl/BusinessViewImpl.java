@@ -128,7 +128,7 @@ public class BusinessViewImpl implements BusinessView {
         BusinessDao dao = new BusinessDaoImpl();
         Business business = dao.getBusinessById(businessId);
         System.out.println("商家编号" + "\t" + "商家名称" + "\t" + "商家地址" + "\t" + "商家备注" + "\t" + "商家起送费" + "\t" + "商家配送费");
-        System.out.println(business.getBusinessId() + "\t" + business.getBusinessName() + "\t" + business.getBusinessExplain()  + "\t" + business.getBusinessAddress()+ "\t" + business.getDeliveryPrice() + "\t" + business.getStartPrice());
+        System.out.println(business.getBusinessId() +"\t"+ business.getBusinessName() + "\t" +business.getBusinessAddress()+"\t" +business.getBusinessExplain() + "\t" + business.getStartPrice() + "\t" + business.getDeliveryPrice());
     }
 
     @Override
