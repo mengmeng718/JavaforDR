@@ -48,10 +48,10 @@ public class LuckyMoneyRepositoryTests {
     @Test
     public  void update(){
         LuckyMoney luckyMoney = new LuckyMoney();
+        luckyMoney.setId(1);
         luckyMoney.setConsumer("我");
         luckyMoney.setMoney(new BigDecimal(99));
         luckyMoney.setProducer("伏黑惠");
-        luckyMoney.setId(1);
         repository.save(luckyMoney);
     }
 
