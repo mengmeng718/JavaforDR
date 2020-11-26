@@ -15,18 +15,19 @@ public class FoodDaoImpl implements FoodDao {
     Connection conn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+
     @Override
     public List<Food> listFoodByBusinessId(Integer businessId) {
         ArrayList<Food> list = new ArrayList<>();
         StringBuffer sql = new StringBuffer("select * from food WHERE 1=1");
-        if (businessId !=null && !businessId.equals("")){
-            sql.append(" and  businessId = "+businessId);
+        if (businessId != null && !businessId.equals("")) {
+            sql.append(" and  businessId = " + businessId);
         }
         try {
             conn = JDBCUtils.getConnection();
             pst = conn.prepareStatement(sql.toString());
             rs = pst.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Food food = new Food();
                 food.setFoodId(rs.getInt("foodId"));
                 food.setFoodName(rs.getString("foodName"));
@@ -55,12 +56,12 @@ public class FoodDaoImpl implements FoodDao {
             pst.setInt(4, food.getBusinessId());
             pst.executeUpdate();
             rs = pst.getGeneratedKeys();
-            if (rs.next()){
-                foodId= rs.getInt(1);
+            if (rs.next()) {
+                foodId = rs.getInt(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             JDBCUtils.close(rs, pst, conn);
         }
         return foodId;
@@ -71,12 +72,12 @@ public class FoodDaoImpl implements FoodDao {
         int result = 0;
         String sql = "update food set foodName = ?,foodExplain =?, foodPrice = ? where foodId = ?";
         try {
-            conn =  JDBCUtils.getConnection();
+            conn = JDBCUtils.getConnection();
             pst = conn.prepareStatement(sql);
-            pst.setString(1,food.getFoodName());
-            pst.setString(2,food.getFoodExplain());
-            pst.setDouble(3,food.getFoodPrice());
-            pst.setInt(4,food.getFoodId());
+            pst.setString(1, food.getFoodName());
+            pst.setString(2, food.getFoodExplain());
+            pst.setDouble(3, food.getFoodPrice());
+            pst.setInt(4, food.getFoodId());
             result = pst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,7 +106,7 @@ public class FoodDaoImpl implements FoodDao {
                 throwables.printStackTrace();
             }
             e.printStackTrace();
-        }finally {
+        } finally {
             JDBCUtils.close(pst, conn);
         }
 
@@ -121,7 +122,7 @@ public class FoodDaoImpl implements FoodDao {
             pst = conn.prepareStatement(sql);
             pst.setInt(1, foodId);
             rs = pst.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 food = new Food();
                 food.setFoodId(rs.getInt("foodId"));
                 food.setFoodName(rs.getString("foodName"));
@@ -132,7 +133,7 @@ public class FoodDaoImpl implements FoodDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             JDBCUtils.close(rs, pst, conn);
         }
         return food;

@@ -13,6 +13,7 @@ public class AdminDaoImpl implements AdminDao {
     Connection conn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+
     @Override
     public Admin getAdminByNameAndPassword(String adminName, String password) {
         Admin admin = null;
@@ -23,13 +24,13 @@ public class AdminDaoImpl implements AdminDao {
             pst.setString(1, adminName);
             pst.setString(2, password);
             rs = pst.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             JDBCUtils.close(rs, pst, conn);
         }
 

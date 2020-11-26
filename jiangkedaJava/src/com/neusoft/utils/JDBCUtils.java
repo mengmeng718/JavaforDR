@@ -16,20 +16,22 @@ import java.util.Properties;
 public class JDBCUtils {
     //定义成员变量DataSource
     private static DataSource ds;
+
     //初始化静态成员变量
     static {
         try {
             //加载properties文件
             Properties pro = new Properties();
-            InputStream in =JDBCUtils.class.getClassLoader().getResourceAsStream("druid.properties");
+            InputStream in = JDBCUtils.class.getClassLoader().getResourceAsStream("druid.properties");
             pro.load(in);
             //给ds初始化
-            ds= DruidDataSourceFactory.createDataSource(pro);
+            ds = DruidDataSourceFactory.createDataSource(pro);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-//获取数据库连接
+
+    //获取数据库连接
     public static Connection getConnection() throws Exception {
         return ds.getConnection();
     }
@@ -37,26 +39,28 @@ public class JDBCUtils {
     public static void main(String[] args) throws Exception {
         JDBCUtils.getConnection();
     }
+
     //关闭连接
-    public static void close(Statement stmt,Connection conn){
-        close(null,stmt,conn);
+    public static void close(Statement stmt, Connection conn) {
+        close(null, stmt, conn);
     }
-    public static void close(ResultSet rs, Statement stmt,Connection conn){
-        if(rs!=null){
+
+    public static void close(ResultSet rs, Statement stmt, Connection conn) {
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         }
-        if(stmt!=null){
+        if (stmt != null) {
             try {
                 stmt.close();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         }
-        if(conn!=null){
+        if (conn != null) {
             try {
                 conn.close();
             } catch (SQLException throwables) {

@@ -18,20 +18,21 @@ public class LuckyMoneyRepositoryTests {
     private LuckyMoneyRepository repository;
 
     @Test
-    public  void listAll(){
-        List<LuckyMoney> list=repository.findAll();
-        for(LuckyMoney luckyMoney: list){
+    public void listAll() {
+        List<LuckyMoney> list = repository.findAll();
+        for (LuckyMoney luckyMoney : list) {
             System.out.println(luckyMoney);
         }
     }
 
     @Test
-    public void  getById(){
+    public void getById() {
         Optional<LuckyMoney> optional = repository.findById(1);
         System.out.println(optional);
     }
+
     @Test
-    public void save(){
+    public void save() {
         LuckyMoney luckyMoney = new LuckyMoney();
         luckyMoney.setConsumer("李四");
         luckyMoney.setMoney(new BigDecimal(11));
@@ -41,12 +42,14 @@ public class LuckyMoneyRepositoryTests {
         //saveAndFlush 是在同一事物下提交前就保存
         repository.saveAndFlush(luckyMoney);
     }
+
     @Test
-    public void delete(){
+    public void delete() {
         repository.deleteById(2);
     }
+
     @Test
-    public  void update(){
+    public void update() {
         LuckyMoney luckyMoney = new LuckyMoney();
         luckyMoney.setId(1);
         luckyMoney.setConsumer("我");

@@ -1,8 +1,10 @@
 package com.neusoft.view.impl;
+
 import com.neusoft.dao.FoodDao;
 import com.neusoft.dao.impl.FoodDaoImpl;
 import com.neusoft.domain.Food;
 import com.neusoft.view.FoodView;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +22,7 @@ public class FoodViewImpl implements FoodView {
         }
         return list;
     }
+
     @Override
     public void saveFood(Integer businessId) {
         System.out.println("请输入新食品的名称");
@@ -35,11 +38,11 @@ public class FoodViewImpl implements FoodView {
         food.setFoodPrice(foodPrice);
         food.setBusinessId(businessId);
         int foodId = dao.saveFood(food);
-        if (foodId >0){
+        if (foodId > 0) {
             System.out.println("保存成功");
             food = dao.getFoodById(foodId);
             System.out.println(food);
-        }else {
+        } else {
             System.out.println("新建食品失败");
         }
     }
@@ -81,9 +84,9 @@ public class FoodViewImpl implements FoodView {
                     break;
 
             }
-            if (res>0){
+            if (res > 0) {
                 System.out.println("修改成功！");
-            }else {
+            } else {
                 System.out.println("修改失败！");
             }
         }
@@ -95,11 +98,11 @@ public class FoodViewImpl implements FoodView {
         int id = input.nextInt();
         FoodDao dao = new FoodDaoImpl();
         System.out.println("确认要删除吗(y/n)");
-        if (input.next().equals("y")){
+        if (input.next().equals("y")) {
             int i = dao.removeFood(id);
-            if (i == 1){
+            if (i == 1) {
                 System.out.println("删除成功");
-            }else{
+            } else {
                 System.out.println("删除失败");
             }
         }

@@ -2,6 +2,7 @@ package com.neusoft;
 
 import com.neusoft.utils.JDBCUtils;
 import sun.awt.geom.AreaOp;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -18,22 +19,23 @@ public class JDBCDemo7 {
         System.out.println("请输入您的密码：");
         String password = scanner.next();
         boolean flag = login(userName, password);
-        if (flag){
+        if (flag) {
             System.out.println("登录成功~");
-        }else {
+        } else {
             System.out.println("用户名或密码错误，请重新登录");
         }
     }
 
     /**
      * 用户登录
+     *
      * @param userName
      * @param password
      * @return
      */
-    public static boolean login(String userName,  String password){
+    public static boolean login(String userName, String password) {
         // 参数校验
-        if (userName == null || password == null){
+        if (userName == null || password == null) {
             return false;
         }
         Connection conn = null;
@@ -41,7 +43,7 @@ public class JDBCDemo7 {
         ResultSet rs = null;
         try {
             conn = JDBCUtils.getConnection();
-            String sql = "select * from user where username = '"+userName+"' and password='"+password+"'";
+            String sql = "select * from user where username = '" + userName + "' and password='" + password + "'";
 //            System.out.println(sql);
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);

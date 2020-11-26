@@ -12,10 +12,11 @@ public interface BusinessView {
     public void removeBusiness();
 
     public Business login();
+
     public void updatePassword(Integer businessId);
 
     public void listBusinesses(Integer businessId);//商家查看自己商家信息
 
-   public void updateBusiness(Integer businessId);//商家更新修改自己信息
+    public void updateBusiness(Integer businessId);//商家更新修改自己信息
 }
 

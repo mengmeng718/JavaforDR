@@ -9,7 +9,7 @@ public class HelloController {
 
     @GetMapping("/hehe")
 //    @RequestMapping
-    public String sayHello(){
+    public String sayHello() {
         return "Hello 伏黑惠的老婆";
     }
 }

@@ -12,12 +12,13 @@ import java.util.List;
  */
 public class JDBCDemo6 {
     public static void main(String[] args) throws Exception {
-      //  List<Emp> empList = findAll();
+        //  List<Emp> empList = findAll();
         List<Emp> empList = findAll2();
-        for (Emp e:empList){
+        for (Emp e : empList) {
             System.out.println(e);
         }
     }
+
     // List<Emp> <>代表泛型的意思， 就是对存储数据的类型做限制
     public static List<Emp> findAll() throws Exception {
         // 多态写法： 父类引用指向子类对象
@@ -25,11 +26,11 @@ public class JDBCDemo6 {
         List<Emp> list = new ArrayList<>();
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://" +
-                "localhost:3366/jiangkeda","root", "root");
+                "localhost:3366/jiangkeda", "root", "root");
         String sql = "select * from emp";
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
-        while ( rs.next()){
+        while (rs.next()) {
             int empno = rs.getInt(1);
             String eName = rs.getString(2);
             String job = rs.getString(3);
@@ -44,16 +45,17 @@ public class JDBCDemo6 {
         //        8、释放资源
         stmt.close();
         conn.close();
-        return  list;
+        return list;
     }
+
     //调用JDBCUtils工具类进行操作
     public static List<Emp> findAll2() throws Exception {
-        Connection conn=JDBCUtils.getConnection();
+        Connection conn = JDBCUtils.getConnection();
         List<Emp> list = new ArrayList<>();
         String sql = "select * from emp";
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
-        while ( rs.next()){
+        while (rs.next()) {
             int empno = rs.getInt(1);
             String eName = rs.getString(2);
             String job = rs.getString(3);
@@ -65,7 +67,7 @@ public class JDBCDemo6 {
             Emp emp = new Emp(empno, eName, job, mgr, hiredata, sal, comm, deptno);
             list.add(emp);
         }
-        JDBCUtils.close(rs,stmt,conn);
-        return  list;
+        JDBCUtils.close(rs, stmt, conn);
+        return list;
     }
 }

@@ -30,7 +30,7 @@ public class LuckyMoneyController {
 
     //根据id查询红包
     @GetMapping("/find/{id}")
-    public LuckyMoney findById(@PathVariable("id")Integer id) {
+    public LuckyMoney findById(@PathVariable("id") Integer id) {
 //        Optional<LuckyMoney> optional = repository.findById(id);
 //        if(optional.isPresent()) {
 //            LuckyMoney luckyMoney = optional.get();
@@ -38,11 +38,12 @@ public class LuckyMoneyController {
 //        }
 //        return null;
         //如果有就返回，没有就返回other
-        return  repository.findById(id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
+
     //收红包
     @PutMapping("/put/{id}")
-    public LuckyMoney put(@PathVariable("id")Integer id,
+    public LuckyMoney put(@PathVariable("id") Integer id,
                           @RequestParam("consumer") String consumer) {
         Optional<LuckyMoney> optional = repository.findById(id);
         if (optional.isPresent()) {
