@@ -53,7 +53,7 @@ public class LuckyMoneyRepositoryTests {
         LuckyMoney luckyMoney = new LuckyMoney();
         luckyMoney.setId(1);
         luckyMoney.setConsumer("我");
-        luckyMoney.setMoney(new BigDecimal(99));
+        luckyMoney.setMoney(new BigDecimal(999));
         luckyMoney.setProducer("伏黑惠");
         repository.save(luckyMoney);
     }
