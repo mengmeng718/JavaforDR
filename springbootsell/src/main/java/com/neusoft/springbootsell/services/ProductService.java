@@ -12,7 +12,7 @@ public interface ProductService {
 //查询所有商品
    List<ProductInfo> findUpAll();
 //分页查询所有商品
-   Page<ProductInfo> fidAll(Pageable pageable);
+   Page<ProductInfo> findAll(Pageable pageable);
    //新增商品
    ProductInfo save(ProductInfo productInfo);
     //上架
