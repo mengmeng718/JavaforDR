@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,11 @@ public class SellerCategoryController {
     @GetMapping("/list")
     public ModelAndView list(Map<String, Object> map){
         List<ProductCategory> list = categoryService.findAll();
+        for (ProductCategory p:list){
+            System.out.println(p);
+        }
         // 将list添加到map中
         map.put("categoryList", list);
-        return new ModelAndView("category/listxiesi", map);
+        return new ModelAndView("category/list", map);
     }
 }
