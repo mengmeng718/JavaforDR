@@ -4,9 +4,11 @@ import com.neusoft.springbootsell.dataobject.ProductCategory;
 import com.neusoft.springbootsell.dataobject.ProductInfo;
 import com.neusoft.springbootsell.exception.SellException;
 import com.neusoft.springbootsell.form.ProductForm;
+import com.neusoft.springbootsell.form.ProductFormTwo;
 import com.neusoft.springbootsell.services.CategoryService;
 import com.neusoft.springbootsell.services.ProductService;
 import com.neusoft.springbootsell.utils.KeyUtil;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -94,6 +96,34 @@ public class SellerProductController {
         }
         map.put("url", "/seller/product/list");
         return new ModelAndView("common/success", map);
+
+    }
+    @GetMapping("/out")
+    public ModelAndView out(@RequestParam(value = "productId", required = false) String productId,
+                              Map<String, Object> map){
+            ProductInfo productInfo = productService.findOne(productId);
+            map.put("productInfo", productInfo);
+        List<ProductCategory> categoryList = categoryService.findAll();
+        map.put("categoryList", categoryList);
+        return new ModelAndView("product/out");
+    }
+    @PostMapping("/change")
+    public ModelAndView change(@Valid ProductFormTwo form,
+                             BindingResult bindingResult,
+                             Map<String, Object> map
+    ){
+        if(bindingResult.hasErrors()){
+
+            map.put("msg",bindingResult.getFieldError().getDefaultMessage());
+            map.put("url","/seller/product/out");
+            return  new ModelAndView("common/error",map);
+        }
+        ProductInfo productInfo= new ProductInfo();
+        productInfo = productService.findOne(form.getProductId());
+        productInfo.setProductStatus(form.getProductStatus());
+        productService.save(productInfo);
+        map.put("url","/seller/product/list");
+        return new ModelAndView("common/success",map);
 
     }
 

@@ -43,7 +43,7 @@
                                     <a href="/seller/product/index?productId=${productInfo.productId}">修改</a>
                                 </td>
                                 <td>
-                                    <a href="#">下架</a>
+                                    <a href="/seller/product/out?productId=${productInfo.productId}">上架/下架</a>
                                 </td>
 
                             </tr>
